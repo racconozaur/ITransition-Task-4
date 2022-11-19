@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
+import axios from 'axios'
 import Button from '../../utils/button/Button';
+import { deleteuser, updateStatus } from '../../actions/user';
 
 const Card = (props) => {
 
@@ -10,7 +12,19 @@ const Card = (props) => {
 
     const blockHandler = () => {
         setBlocked(!blocked)
+        updateStatus(props.id)
+        props.updateEffect()
     }
+
+    const deleteHandler = async () => {
+        console.log(props.id);
+        deleteuser(props.id)
+        props.updateEffect()
+        
+        
+    }
+
+    
 
     return (
         <div className=' w-64 h-64 m-4 bg-blue-500 border-2 border-white rounded-lg flex flex-col justify-around p-4 text-slate-800 text-lg font-semibold '>
@@ -25,13 +39,14 @@ const Card = (props) => {
             <p>Status: {props.status}</p>
             <div className=' flex justify-around'>
                 <Button
-                    className={!blocked ? ' bg-green-300 hover:bg-green-500' : 'bg-red-400 hover:bg-red-500' }
+                    className={props.status == 'active' ? ' bg-green-300 hover:bg-green-500' : 'bg-red-400 hover:bg-red-500' }
                     onClick={blockHandler}
                 >
-                    {blocked ? 'Block' : 'Unblock'}
+                    {props.status == 'active' ? 'Block' : 'Unblock'}
                 </Button>
                 <Button
                     className={' bg-white hover:bg-slate-200'}
+                    onClick={deleteHandler}
                 >
                     Delete
                 </Button>

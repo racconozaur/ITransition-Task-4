@@ -43,6 +43,25 @@ export const auth =  () => {
     }
 }
 
+export const deleteuser = async (id) => {
+    try {
+        await axios.delete(`http://localhost:5000/api/auth/delete/${id}`)
+        
+    } catch (e) {
+        alert(e.response.data.message)
+    }
+}
+
+export const updateStatus = async (id) => {
+    try {
+        await axios.patch(`http://localhost:5000/api/auth/user/${id}`)
+        
+    } catch (e) {
+        alert(e.response.data.message)
+    }
+}
+
+
 
 
 

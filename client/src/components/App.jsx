@@ -10,9 +10,10 @@ import MenuCard from './Card/MenuCard';
 import { useState } from 'react';
 import axios from 'axios'
 
-let count = 0
+
 
 function App() {
+    const [count, setCount] = useState(0)
     const isAuth = useSelector(state => state.user.isAuth)
     const dispatch = useDispatch()
 
@@ -28,6 +29,10 @@ function App() {
         } catch (e) {
             console.log(e);
         }
+    }
+
+    const updateEffect = () => {
+        setCount(count+1)
     }
 
     useEffect(() => {
@@ -50,7 +55,7 @@ function App() {
                 </div>
                 
                     {isAuth 
-                        ? <MenuCard className={'container mx-auto flex flex-wrap justify-start'} data={data}/> 
+                        ? <MenuCard className={'container mx-auto flex flex-wrap justify-start'} data={data} updateEffect={updateEffect}/> 
                         : <h2 className=' flex justify-center text-lg font-bold mt-10 text-white'>Hello u should Register or Log-In first :)</h2>
                     }
                 

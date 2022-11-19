@@ -85,16 +85,43 @@ router.get('/auth', authMiddleware,
     })
 
 router.get('/allusers',
+    async (req, res) => {
+        try {
+            const user = await User.find({}, {"password": 0})
+            return res.json(user)
+
+
+        } catch (e) {
+            console.log(e)
+            res.send({message: "Server error"})
+        }
+    })
+
+router.delete(`/delete/:id`, 
+    async (req, res) => {
+        try {
+            const user = await User.findOne({"_id": req.params.id})
+            user.delete()
+            return res.status(204).json({})
+        } catch (e) {
+            console.log(e)
+            res.send({message: "Server error"})
+        }
+
+    })
+
+router.patch(`/user/:id`, 
 async (req, res) => {
     try {
-        const user = await User.find({}, {'password': 0})
-        return res.json(user)
-
-
+        const user = await User.findOne({"_id": req.params.id})
+        user.status = user.status == 'active' ? 'blocked' : 'active'
+        user.save()
+        return res.status(204).json({})
     } catch (e) {
         console.log(e)
         res.send({message: "Server error"})
     }
+
 })
 
 module.exports = router
