@@ -9,7 +9,7 @@ Simple Registration application using:
 
 ### Web-Page
 
-https://registrationtask.herokuapp.com/
+https://taskfouritransition.herokuapp.com/login
 
 ## Installation
 
