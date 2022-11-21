@@ -38,6 +38,7 @@ function App() {
 
     const updateEffect = () => {
         setCount(count+1)
+        // getAll()
     }
 
     useEffect(() => {
@@ -65,7 +66,7 @@ function App() {
             
                 
                     {isAuth 
-                        ? <MenuCard className={'container mx-auto flex flex-wrap justify-start'} data={data} updateEffect={updateEffect}/> 
+                        ? <MenuCard className={'container mx-auto flex flex-col justify-cener'} data={data} updateEffect={updateEffect}/> 
                         : <h2 className=' flex justify-center text-lg font-bold mt-10 text-white'>Hello u should Register or Log-In first :)</h2>
                     }
                 
